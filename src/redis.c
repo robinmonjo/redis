@@ -2186,7 +2186,7 @@ int time_independent_strcmp(char *a, char *b) {
 }
 
 void authCommand(redisClient *c) {
-    printf("argv1 = %s, server.requirePass = %s", c->argv[1]->ptr,  server.requirepass);
+    redisLog(REDIS_NOTICE,"argv == %s, requirepass = %s",c->argv[1]->ptr,server.requirepass);
     if (!server.requirepass) {
         addReplyError(c,"Client sent AUTH, but no password is set");
     } else if (!time_independent_strcmp(c->argv[1]->ptr, server.requirepass)) {
